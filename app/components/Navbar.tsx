@@ -2,6 +2,7 @@ import React from "react";
 import Container from "../common/Container";
 import Logo from "./Logo";
 import Search from "./Search";
+import UserMenu from "./UserMenu";
 
 const Navbar = () => {
   return (
@@ -17,7 +18,8 @@ const Navbar = () => {
             md:gap-0"
           >
             <Logo />
-            {/* <Search /> */}
+            <Search />
+            <UserMenu />
           </div>
         </Container>
       </div>
