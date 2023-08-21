@@ -1,18 +1,20 @@
 "use client";
 import axios from "axios";
-import { AiFillGithub } from "react-icons/ai";
-import { FcGoogle } from "react-icons/fc";
-import { FieldValues, SubmitHandler, set, useForm } from "react-hook-form";
-import useRegisterModal from "../hooks/useRegisterModal";
-import { useState } from "react";
-import Modal from "./Modal";
-import Heading from "./Heading";
-import Input from "../common/Input";
+import { useCallback, useState } from "react";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
+import { FcGoogle } from "react-icons/fc";
 import Button from "../common/Button";
+import Input from "../common/Input";
+import useRegisterModal from "../hooks/useRegisterModal";
+import Heading from "./Heading";
+import Modal from "./Modal";
+import useLoginModal from "../hooks/useLoginModal";
 
 const RegisterModal = () => {
   const registerModal = useRegisterModal();
+  const loginModal = useLoginModal();
+
   const [isLoading, setIsLoading] = useState(false);
   const {
     register,
@@ -40,6 +42,11 @@ const RegisterModal = () => {
         setIsLoading(false);
       });
   };
+
+  const onToggle = useCallback(() => {
+    loginModal.onOpen();
+    registerModal.onClose();
+  }, [loginModal, registerModal]);
 
   const bodyContent = (
     <div className="flex flex-col gap-4">
@@ -86,7 +93,7 @@ const RegisterModal = () => {
           <div>Already have an account</div>
         </div>
         <div
-          onClick={registerModal.onClose}
+          onClick={onToggle}
           className="text-neutral-800 cursor-pointer hover:underline"
         >
           Log In

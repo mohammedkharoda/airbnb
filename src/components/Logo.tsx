@@ -1,6 +1,6 @@
 "use client";
 
-import { ImageConfig } from "@/utils/ImageConfig";
+import { ImageConfig } from "@/src/utils/ImageConfig";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
