@@ -21,8 +21,6 @@ export const authOptions: AuthOptions = {
       },
       async authorize(credentials) {
         try {
-          console.log("Received credentials:", credentials);
-
           if (!credentials?.email || !credentials?.password) {
             throw new Error('Invalid Input');
           }
@@ -66,4 +64,5 @@ export const authOptions: AuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
 }
 
-export default NextAuth(authOptions);
+const handler = NextAuth(authOptions)
+export {handler as POST , handler as GET}
