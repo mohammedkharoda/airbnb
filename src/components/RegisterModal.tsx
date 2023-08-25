@@ -68,7 +68,7 @@ const RegisterModal = () => {
         required
       />
       <Input
-        id="passowrd"
+        id="password"
         label="Password"
         type="password"
         disable={isLoading}
