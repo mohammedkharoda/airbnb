@@ -4,12 +4,14 @@ import Logo from "./Logo";
 import Search from "./Search";
 import UserMenu from "./UserMenu";
 import { User } from "@prisma/client";
+import Categories from "./Categories";
 
 interface NavbarProps {
-  currentUser?: User;
+  currentUser?: User | null | any;
 }
 
 const Navbar = ({ currentUser }: NavbarProps) => {
+  console.log({ currentUser })
   return (
     <div className="fixed w-full bg-white z-10 shadow-sm">
       <div className="py-4 border-b-[1px]">
@@ -28,6 +30,7 @@ const Navbar = ({ currentUser }: NavbarProps) => {
           </div>
         </Container>
       </div>
+      <Categories />
     </div>
   );
 };

@@ -1,7 +1,12 @@
 import { ImageConfig } from "@/src/utils/ImageConfig";
 import Image from "next/image";
 
-const Avatar = () => {
+
+interface AvatarProps {
+  src?: string | null | undefined;
+}
+
+const Avatar = ({ src }: AvatarProps) => {
   return (
     <>
       <Image
@@ -9,7 +14,7 @@ const Avatar = () => {
         height="30"
         width="30"
         alt="Avatar"
-        src={ImageConfig.USER_LOGO}
+        src={src || ImageConfig.USER_LOGO}
       />
     </>
   );

@@ -19,7 +19,7 @@ export const authOptions: AuthOptions = {
         email: { label: 'email', type: 'text' },
         password: { label: 'password', type: 'password' }
       },
-      async authorize(credentials) {
+      authorize: async (credentials) => {
         try {
           if (!credentials?.email || !credentials?.password) {
             throw new Error('Invalid Input');
@@ -27,8 +27,8 @@ export const authOptions: AuthOptions = {
 
           const user = await prisma.user.findUnique({
             where: {
-              email: credentials.email.toLowerCase()
-            }
+              email: credentials.email.toLowerCase(),
+            },
           });
 
           if (!user || !user?.hashedPassword) {
@@ -40,12 +40,11 @@ export const authOptions: AuthOptions = {
             user.hashedPassword
           );
 
-          console.log("Password comparison result:", isCorrectPassword);
-
           if (!isCorrectPassword) {
             throw new Error('Invalid credentials');
           }
 
+          // Return the user object to authenticate
           return user;
         } catch (error) {
           console.error("Authorization error:", error);
@@ -61,8 +60,9 @@ export const authOptions: AuthOptions = {
   session: {
     strategy: "jwt",
   },
-  secret: process.env.NEXTAUTH_SECRET,
+  secret: process.env.NEXTAUTH_SECRET as string,
+
 }
 
 const handler = NextAuth(authOptions)
-export {handler as POST , handler as GET}
+export { handler as POST, handler as GET }

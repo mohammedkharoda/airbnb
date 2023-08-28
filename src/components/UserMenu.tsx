@@ -25,7 +25,7 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
       <div className="flex flex-row items-center gap-3">
         <div
           className="hidden md:block text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer"
-          onClick={() => {}}
+          onClick={() => { }}
         >
           Airbnb your home
         </div>
@@ -35,7 +35,7 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
         >
           <AiOutlineMenu />
           <div className="hidden md:block">
-            <Avatar />
+            <Avatar src={currentUser?.image} />
           </div>
         </div>
       </div>
@@ -44,11 +44,11 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
           <div className="flex flex-col cursor-pointer">
             {currentUser ? (
               <>
-                <MenuItem onClick={() => {}} label="My trip" />
-                <MenuItem onClick={() => {}} label="My Favourite" />
-                <MenuItem onClick={() => {}} label="My Reservation" />
-                <MenuItem onClick={() => {}} label="My Properties" />
-                <MenuItem onClick={() => {}} label="Airbnb my home" />
+                <MenuItem onClick={() => { }} label="My trip" />
+                <MenuItem onClick={() => { }} label="My Favourite" />
+                <MenuItem onClick={() => { }} label="My Reservation" />
+                <MenuItem onClick={() => { }} label="My Properties" />
+                <MenuItem onClick={() => { }} label="Airbnb my home" />
                 <hr />
                 <MenuItem onClick={() => signOut()} label="Logout" />
               </>

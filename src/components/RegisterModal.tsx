@@ -1,15 +1,16 @@
 "use client";
 import axios from "axios";
+import { signIn } from "next-auth/react";
 import { useCallback, useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { FcGoogle } from "react-icons/fc";
 import Button from "../common/Button";
 import Input from "../common/Input";
+import useLoginModal from "../hooks/useLoginModal";
 import useRegisterModal from "../hooks/useRegisterModal";
 import Heading from "./Heading";
 import Modal from "./Modal";
-import useLoginModal from "../hooks/useLoginModal";
 
 const RegisterModal = () => {
   const registerModal = useRegisterModal();
@@ -86,7 +87,7 @@ const RegisterModal = () => {
         outline
         label="Continue with the Google"
         icon={FcGoogle}
-        onClick={() => {}}
+        onClick={() => signIn("google")}
       />
       <div className="text-neutral-500 text-center mt-4 font-light">
         <div className="justify-center flex flex-row items-center gap-2">
