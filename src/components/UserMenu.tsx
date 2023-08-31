@@ -22,12 +22,14 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
   const toggleOpen = useCallback(() => {
     setIsOpen((value) => !value);
   }, []);
+
   const onRent = useCallback(() => {
     if (!currentUser) {
       return loginModal.onOpen();
     }
     rentModal.onOpen();
   }, [currentUser, loginModal, rentModal]);
+
   return (
     <div className="relative">
       <div className="flex flex-row items-center gap-3">

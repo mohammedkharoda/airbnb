@@ -6,6 +6,9 @@ import { categories } from "./Categories";
 import CategoryInput from "./CategoryInput";
 import Heading from "./Heading";
 import Modal from "./Modal";
+import CountrySelect from "./CountrySelect";
+import dynamic from "next/dynamic";
+import Counter from "../common/Counter";
 
 enum STEPS {
   CATEGORY = 0,
@@ -42,6 +45,10 @@ const RentModals = () => {
   });
 
   const category = watch("category");
+  const location = watch("location");
+  const guestCount = watch("guestCount");
+  const roomsCount = watch("roomCount");
+  const bathroomCount = watch("bathroomCount");
 
   const setCustomValue = (id: string, value: any) => {
     setValue(id, value, {
@@ -73,6 +80,11 @@ const RentModals = () => {
     return "Back";
   }, [steps]);
 
+  const Map = useMemo(
+    () => dynamic(() => import("./Map"), { ssr: false }),
+    [location]
+  );
+
   let bodyContent = (
     <div className="flex flex-col gap-8">
       <Heading
@@ -94,8 +106,55 @@ const RentModals = () => {
     </div>
   );
 
+  // Location
+
   if (steps === STEPS.LOCATION) {
-    bodyContent = <div></div>;
+    bodyContent = (
+      <div className="flex flex-col gap-8">
+        <Heading
+          title="Where is your plce located ?"
+          subtitle="Help guests find you!"
+        />
+        <CountrySelect
+          value={location}
+          onChange={(value) => setCustomValue("location", value)}
+        />
+        <Map center={location?.latlng} />
+      </div>
+    );
+  }
+
+  // Info
+
+  if (steps === STEPS.INFO) {
+    bodyContent = (
+      <div className="flex flex-col gap-8 ">
+        <Heading
+          title="Share some basics about your place"
+          subtitle="What amienties do you have "
+        />
+        <Counter
+          onChange={(value) => setCustomValue("guestCount", value)}
+          value={guestCount}
+          title="Guests"
+          subtitle="How many guests do you allow?"
+        />
+        <hr />
+        <Counter
+          onChange={(value) => setCustomValue("roomCount", value)}
+          value={roomsCount}
+          title="Rooms"
+          subtitle="How many Room do you have?"
+        />
+        <hr />
+        <Counter
+          onChange={(value) => setCustomValue("bathroomCount", value)}
+          value={bathroomCount}
+          title="Guests"
+          subtitle="How many Bathroom do you want?"
+        />
+      </div>
+    );
   }
 
   return (
@@ -104,7 +163,7 @@ const RentModals = () => {
         isOpen={rentModal.isOpen}
         title="Airbnb your home!"
         onClose={rentModal.onClose}
-        onSubmit={rentModal.onClose}
+        onSubmit={onNext}
         actionLabel={actionLabel}
         body={bodyContent}
         secondaryActionLabel={secondaryActionLabel}
