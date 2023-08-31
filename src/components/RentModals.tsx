@@ -9,6 +9,7 @@ import Modal from "./Modal";
 import CountrySelect from "./CountrySelect";
 import dynamic from "next/dynamic";
 import Counter from "../common/Counter";
+import ImageUpload from "./ImageUpload";
 
 enum STEPS {
   CATEGORY = 0,
@@ -49,6 +50,7 @@ const RentModals = () => {
   const guestCount = watch("guestCount");
   const roomsCount = watch("roomCount");
   const bathroomCount = watch("bathroomCount");
+  const imageSrc = watch("imageSrc");
 
   const setCustomValue = (id: string, value: any) => {
     setValue(id, value, {
@@ -107,7 +109,6 @@ const RentModals = () => {
   );
 
   // Location
-
   if (steps === STEPS.LOCATION) {
     bodyContent = (
       <div className="flex flex-col gap-8">
@@ -125,7 +126,6 @@ const RentModals = () => {
   }
 
   // Info
-
   if (steps === STEPS.INFO) {
     bodyContent = (
       <div className="flex flex-col gap-8 ">
@@ -152,6 +152,22 @@ const RentModals = () => {
           value={bathroomCount}
           title="Guests"
           subtitle="How many Bathroom do you want?"
+        />
+      </div>
+    );
+  }
+
+  // Images
+  if (steps === STEPS.IMAGES) {
+    bodyContent = (
+      <div className="flex flex-col gap-8">
+        <Heading
+          title="Add a photo of your place"
+          subtitle="Show people what your space look like!"
+        />
+        <ImageUpload
+          value={imageSrc}
+          onChange={(value) => setCustomValue("imageSrc", value)}
         />
       </div>
     );
