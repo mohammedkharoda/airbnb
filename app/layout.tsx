@@ -8,6 +8,7 @@ import RegisterModal from "@/src/components/RegisterModal";
 import LoginModal from "@/src/components/LoginModal";
 import RentModals from "@/src/components/RentModals";
 import getCurrentUser from "./actions/getCurrentUser";
+import Airbnb from "@/public/images/airbnb.png";
 export const metadata: Metadata = {
   title: "Airbnb",
   description: "Airbnb Clone",
@@ -33,7 +34,7 @@ export default async function RootLayout({
           <LoginModal />
           <Navbar currentUser={currentUser} />
         </ClientOnly>
-        {children}
+        <div className="pb-20 pt-28">{children}</div>
       </body>
     </html>
   );
