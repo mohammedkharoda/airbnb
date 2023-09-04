@@ -12,7 +12,6 @@ export default async function getCurrentUser() {
         const session = await getSession();
 
         if (!session?.user?.email) {
-            console.log("No session found")
             return null;
         }
 
@@ -29,7 +28,7 @@ export default async function getCurrentUser() {
         return {
             ...currentUser,
             createdAt: currentUser.createdAt.toISOString(),
-            // updatedAt: currentUser.updatedAt.toISOString(),
+            updatedAt: currentUser.updatedAt.toISOString(),
             emailVerified:
                 currentUser.emailVerified?.toISOString() || null,
         };

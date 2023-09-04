@@ -56,10 +56,20 @@ const ListingCard = ({
     if (!reservation) {
       return null;
     }
+
     const start = reservation.startDate;
     const end = reservation.endDate;
 
-    return `${format(start, "pp")} - ${format(end, "pp")}`;
+    if (
+      !start ||
+      !end ||
+      isNaN(start as unknown as number) ||
+      isNaN(end as unknown as number)
+    ) {
+      return null;
+    }
+
+    return `${format(start.getTime(), "pp")} - ${format(end.getTime(), "pp")}`;
   }, [reservation]);
 
   return (
