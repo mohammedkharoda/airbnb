@@ -30,8 +30,8 @@ const ListingCard = ({
 }: ListingCardProps) => {
   const router = useRouter();
   const { getByValue } = useCountries();
-  const location = getByValue(data.locationValue);
-
+  const location = getByValue(data?.locationValue);
+  
   const handleCancel = useCallback(
     (e: React.MouseEvent<HTMLButtonElement>) => {
       e.stopPropagation();
@@ -47,10 +47,10 @@ const ListingCard = ({
 
   const price = useMemo(() => {
     if (reservation) {
-      return reservation.totalPrice;
+      return reservation?.totalPrice;
     }
-    return data.price;
-  }, [reservation, data.price]);
+    return data?.price;
+  }, [reservation, data?.price]);
 
   const reservationDate = useMemo(() => {
     if (!reservation) {
@@ -87,7 +87,7 @@ const ListingCard = ({
             rounded-xl"
           >
             <Image
-              src={data.imageSrc}
+              src={data?.imageSrc}
               alt="listing"
               className="object-cover 
               h-full 
@@ -103,14 +103,14 @@ const ListingCard = ({
             right-3
           "
             >
-              <HeartButton listingId={data.id} currentUser={currentUser} />
+              <HeartButton listingId={data?.id} currentUser={currentUser} />
             </div>
           </div>
           <div className="font-semibold text-lg">
             {location?.region} , {location?.label}
           </div>
           <div className="font-light text-neutral-800/60">
-            {reservationDate || data.category}
+            {reservationDate || data?.category}
           </div>
           <div className="flex flex-row items-center gap-1">
             <div className="font-semibold">${price}</div>

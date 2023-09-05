@@ -3,7 +3,7 @@ const { PrismaClient } = require("@prisma/client");
 const db = new PrismaClient();
 
 const userIds = [
-    "64f585c7fe4059416ffafa54", //Replace it by your userId
+    "64f7532d6b2d1f2f9ab9b055", //Replace it by your userId
     // Add more user IDs here
 ];
 
