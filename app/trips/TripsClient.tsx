@@ -10,7 +10,7 @@ import Container from "@/src/common/Container";
 import ListingCard from "@/src/components/ListingCard";
 
 interface TripsClientProps {
-  reservations: SafeReservation[];
+  reservations: SafeReservation[]|any;
   currentUser?: SafeUser | null;
 }
 

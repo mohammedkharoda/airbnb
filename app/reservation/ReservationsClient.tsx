@@ -10,7 +10,7 @@ import Heading from "@/src/components/Heading";
 import ListingCard from "@/src/components/ListingCard";
 
 interface ReservationsClientProps {
-  reservations: SafeReservation[];
+  reservations: SafeReservation[]|any;
   currentUser?: SafeUser | null;
 }
 
