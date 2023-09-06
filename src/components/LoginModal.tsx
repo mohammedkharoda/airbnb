@@ -34,23 +34,32 @@ const LoginModal = () => {
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsLoading(true);
-
     signIn("credentials", {
       ...data,
       redirect: false,
-    }).then((callback) => {
-      setIsLoading(false);
+    })
+      .then((callback) => {
+        setIsLoading(false);
 
-      if (callback?.ok) {
-        toast.success("Logged in");
-        router.refresh();
-        loginModal.onClose();
-      }
-
-      if (callback?.error) {
-        toast.error(callback.error);
-      }
-    });
+        if (callback?.ok) {
+          // Successful login
+          toast.success("Logged in");
+          router.refresh();
+          loginModal.onClose();
+        } else if (callback?.error && !callback?.ok) {
+          // Error during login attempt
+          toast.error(callback.error);
+        } else {
+          // Handle unexpected case or display a generic error
+          toast.error("An unexpected error occurred.");
+        }
+      })
+      .catch((error) => {
+        // Handle errors that occur during the authentication process
+        setIsLoading(false);
+        toast.error("An error occurred during login.");
+        console.error(error); // Log the error for debugging
+      });
   };
 
   const onToggle = useCallback(() => {
