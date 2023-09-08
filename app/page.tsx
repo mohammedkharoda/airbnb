@@ -1,25 +1,25 @@
 export const dynamic = "force-dynamic";
 
-import getCurrentUser from "@/actions/getCurrentUser";
+import Container from "@/src/common/Container";
 import ClientOnly from "./ClientOnly";
-import getListings, { IListingsParams } from "@/actions/getListings";
-import Container from "@/components/Container";
-import EmptyState from "@/components/EmptyState";
-import ListinCard from "@/components/listings/ListinCard";
+import EmptyState from "@/src/components/EmptyState";
+import getListing, { ILisitngParams } from "./actions/getListings";
+import ListingCard from "@/src/components/ListingCard";
+import getCurrentUser from "./actions/getCurrentUser";
 
 interface HomeProps {
-  searchParams: IListingsParams;
+  searchParams: ILisitngParams;
 }
 
 const Home = async ({ searchParams }: HomeProps) => {
-  const listings = await getListings(searchParams);
+  const listings = await getListing(searchParams);
   const currentUser = await getCurrentUser();
   if (listings.length === 0) {
     return (
-<ClientOnly>
-<EmptyState showReset />
-<ClientOnly/>
-);
+      <ClientOnly>
+        <EmptyState showReset />
+      </ClientOnly>
+    );
   }
   return (
     <div>
@@ -33,11 +33,11 @@ const Home = async ({ searchParams }: HomeProps) => {
             lg:grid-cols-4
             xl:grid-cols-5
             2xl:grid-cols-6
-            gap-8"
-        >
+            gap-8">
           {listings.map((listing) => {
             return (
-              <ListinCard
+              <ListingCard
+                disable
                 currentUser={currentUser}
                 key={listing.id}
                 data={listing}
